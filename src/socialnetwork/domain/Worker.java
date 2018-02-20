@@ -1,5 +1,8 @@
 package socialnetwork.domain;
 
+import java.util.Optional;
+import socialnetwork.domain.Task.Command;
+
 public class Worker extends Thread {
 
   private final Backlog backlog;
@@ -12,7 +15,15 @@ public class Worker extends Thread {
   @Override
   public void run() {
     while (!interrupted) {
-      // implement here
+      Optional<Task> nextTask = backlog.getNextTaskToProcess();
+      if (!nextTask.isPresent()) {
+        try {
+          Thread.sleep(5);
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        }
+      }
+      process(nextTask.get());
     }
   }
 
@@ -21,6 +32,13 @@ public class Worker extends Thread {
   }
 
   public void process(Task nextTask) {
-    // implement here
-  }
+    if (nextTask.command.equals(Command.POST)) {
+      nextTask.board.addMessage(nextTask.message);
+    }
+    if (nextTask.command.equals(Command.DELETE)) {
+      if (!nextTask.board.deleteMessage(nextTask.message)) {
+        backlog.add(nextTask);
+      }
+    }
+    }
 }

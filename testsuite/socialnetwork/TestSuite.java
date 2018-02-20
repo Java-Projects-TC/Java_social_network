@@ -14,13 +14,15 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import org.junit.Test;
 import socialnetwork.domain.Backlog;
+import socialnetwork.domain.BaseDomains.BaseBacklog;
+import socialnetwork.domain.BaseDomains.BaseBoard;
 import socialnetwork.domain.Board;
 import socialnetwork.domain.Message;
 import socialnetwork.domain.Worker;
 
 public class TestSuite {
 
-  @Test
+  @Test(timeout = 1000)
   public void testSmallParams() {
     ExperimentSettings settings = new ExperimentSettings(1, 5, 50,
         3, 123456);
@@ -71,7 +73,7 @@ public class TestSuite {
 
   private void runExperiment(ExperimentSettings settings) {
     //TODO replace by your Backlog implementation
-    Backlog backlog = null;
+    Backlog backlog = new BaseBacklog();
     SocialNetwork socialNetwork = new SocialNetwork(backlog);
 
     Worker[] workers = new Worker[settings.nWorkers];
@@ -89,7 +91,8 @@ public class TestSuite {
     });
     Arrays.stream(userThreads).forEach(u -> {
       //TODO add your own board implementation
-      socialNetwork.register(u, null);
+      Board board = new BaseBoard();
+      socialNetwork.register(u, board);
       u.start();
     });
 

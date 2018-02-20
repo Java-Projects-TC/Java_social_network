@@ -3,49 +3,29 @@ package socialnetwork.domain.BaseDomains;
 import java.util.List;
 import socialnetwork.domain.Board;
 import socialnetwork.domain.Message;
+import socialnetwork.domain.sequential.SequentialSet;
 
-public class BaseBoard implements Board{
+public class BaseBoard extends SequentialSet implements Board {
 
-  int size = 0;
-
-  private Position find(Message start, int id) {
-    Message pred, curr;
-    curr = start;
-    do {
-      pred = curr;
-      curr = curr.next();
-    } while (curr.key() < key);  // until curr.key >= key
-    return new Position(pred, curr);
+  public BaseBoard(){
+    super();
   }
 
-  @Override
   public boolean addMessage(Message message) {
-    return false;
+    return super.add(message);
   }
 
-  @Override
   public boolean deleteMessage(Message message) {
-    return false;
+    return super.remove(message);
   }
 
   @Override
   public int size() {
-    return 0;
+    return super.size();
   }
 
   @Override
   public List<Message> getBoardSnapshot() {
-    return null;
+    return toArrayList();
   }
-
-  private static class Position<Message> {
-
-    public final Message pred, curr;
-
-    public Position(Message pred, Message curr) {
-      this.pred = pred;
-      this.curr = curr;
-    }
-  }
-
 }
