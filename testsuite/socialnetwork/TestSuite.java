@@ -22,7 +22,7 @@ import socialnetwork.domain.Worker;
 
 public class TestSuite {
 
-  @Test(timeout = 1000)
+  @Test
   public void testSmallParams() {
     ExperimentSettings settings = new ExperimentSettings(1, 5, 50,
         3, 123456);

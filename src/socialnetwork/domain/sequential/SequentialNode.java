@@ -3,8 +3,6 @@ package socialnetwork.domain.sequential;
 // Taken from Antonio's gitlab
 
 public class SequentialNode<E> implements Node<E> {
-  static final SequentialNode head = new SequentialNode<>(null, Integer.MIN_VALUE, null);
-  static final SequentialNode tail = new SequentialNode<>(null, Integer.MAX_VALUE, null);
 
   private E item;
   private int key;

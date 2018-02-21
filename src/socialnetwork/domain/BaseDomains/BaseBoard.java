@@ -7,10 +7,6 @@ import socialnetwork.domain.sequential.SequentialSet;
 
 public class BaseBoard extends SequentialSet implements Board {
 
-  public BaseBoard(){
-    super();
-  }
-
   public boolean addMessage(Message message) {
     return super.add(message);
   }

@@ -7,12 +7,15 @@ public class SequentialSet<E> {
 
   // This code was taken from Anto's gitlab he uses for lectures
 
+  // Slightly modified so that the head is created in here rather than as a
+  // static variable in SeqNode.
+
   int size = 0;
   private Node<E> head, tail;
 
   public SequentialSet() {
-    head = SequentialNode.head;
-    tail = SequentialNode.tail;
+    head = new SequentialNode<>(null, Integer.MIN_VALUE, null);
+    tail = new SequentialNode<>(null, Integer.MAX_VALUE, null);
     head.setNext(tail);
   }
 

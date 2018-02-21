@@ -3,7 +3,6 @@ package socialnetwork.domain.BaseDomains;
 import java.util.Optional;
 import socialnetwork.domain.Backlog;
 import socialnetwork.domain.Task;
-import socialnetwork.domain.sequential.Node;
 import socialnetwork.domain.sequential.SequentialSet;
 
 public class BaseBacklog extends SequentialSet implements Backlog {
@@ -15,15 +14,13 @@ public class BaseBacklog extends SequentialSet implements Backlog {
 
   @Override
   public Optional<Task> getNextTaskToProcess() {
-    if (size() == 0) {
-      return Optional.empty();
+    if (size() != 0) {
+      Task nextTask = (Task) getFirst().item();
+      if (remove(nextTask)) {
+        return Optional.of(nextTask);
+      }
     }
-    Node<Task> nextTask = getFirst();
-    if (remove(nextTask.item())) {
-      return Optional.of(nextTask.item());
-    } else {
-      return Optional.empty();
-    }
+    return Optional.empty();
   }
 
   @Override
