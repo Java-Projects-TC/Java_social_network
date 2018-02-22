@@ -2,6 +2,8 @@ package socialnetwork.domain.sequential;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class SequentialSet<E> {
 
@@ -12,6 +14,8 @@ public class SequentialSet<E> {
 
   int size = 0;
   private Node<E> head, tail;
+
+  private Lock lock = new ReentrantLock();
 
   public SequentialSet() {
     head = new SequentialNode<>(null, Integer.MIN_VALUE, null);
@@ -24,13 +28,18 @@ public class SequentialSet<E> {
   }
 
   public List<E> toArrayList(){
-    List<E> list = new ArrayList<>();
-    Node<E> node = head.next();
-    while (node != tail) {
-      list.add(0, node.item());
-      node = node.next();
+    lock.lock();
+    try {
+      List<E> list = new ArrayList<>();
+      Node<E> node = head.next();
+      while (node != tail) {
+        list.add(0, node.item());
+        node = node.next();
+      }
+      return list;
+    } finally {
+      lock.unlock();
     }
-    return list;
   }
 
   private Position<E> find(Node<E> start, int key) {
@@ -51,27 +60,37 @@ public class SequentialSet<E> {
   }
 
   public boolean add(E item) {
-    Node<E> node = new SequentialNode<>(item);
-    Position<E> where = find(head, node.key());
-    if (where.curr.key() == node.key()) {
-      return false;
-    } else {
-      node.setNext(where.curr);
-      where.pred.setNext(node);
-      size += 1;
-      return true;
+    lock.lock();
+    try {
+      Node<E> node = new SequentialNode<>(item);
+      Position<E> where = find(head, node.key());
+      if (where.curr.key() == node.key()) {
+        return false;
+      } else {
+        node.setNext(where.curr);
+        where.pred.setNext(node);
+        size += 1;
+        return true;
+      }
+    } finally {
+      lock.unlock();
     }
   }
 
   public boolean remove(E item) {
-    Node<E> node = new SequentialNode<>(item);
-    Position<E> where = find(head, node.key());
-    if (where.curr.key() > node.key()) {
-      return false;
-    } else {
-      where.pred.setNext(where.curr.next());
-      size -= 1;
-      return true;
+    lock.lock();
+    try {
+      Node<E> node = new SequentialNode<>(item);
+      Position<E> where = find(head, node.key());
+      if (where.curr.key() > node.key()) {
+        return false;
+      } else {
+        where.pred.setNext(where.curr.next());
+        size -= 1;
+        return true;
+      }
+    }finally {
+      lock.unlock();
     }
   }
 

@@ -24,28 +24,28 @@ import socialnetwork.domain.Worker;
 
 public class TestSuite {
 
-  @Test(timeout = 3000)
+  @Test
   public void testSmallParams() {
     ExperimentSettings settings = new ExperimentSettings(1, 5, 50,
         3, 123456);
     runExperiment(settings);
   }
 
-  @Test (timeout = 5)
+  @Test
   public void testMediumParams() {
     ExperimentSettings settings = new ExperimentSettings(3, 10, 50,
         10, 123456);
     runExperiment(settings);
   }
 
-  @Test (timeout = 5)
+  @Test
   public void testSlightlyLargerParams() {
     ExperimentSettings settings = new ExperimentSettings(5, 40, 75,
         15, 123456);
     runExperiment(settings);
   }
 
-  @Test (timeout = 5)
+  @Test
   public void testLargeParams() {
     ExperimentSettings settings = new ExperimentSettings(10, 100, 100,
         20, 123456);
@@ -75,7 +75,7 @@ public class TestSuite {
 
   private void runExperiment(ExperimentSettings settings) {
     //TODO replace by your Backlog implementation
-    Backlog backlog = new CoarseBacklog();
+    Backlog backlog = new BaseBacklog();
     SocialNetwork socialNetwork = new SocialNetwork(backlog);
 
     Worker[] workers = new Worker[settings.nWorkers];
@@ -93,7 +93,7 @@ public class TestSuite {
     });
     Arrays.stream(userThreads).forEach(u -> {
       //TODO add your own board implementation
-      Board board = new CoarseBoard();
+      Board board = new BaseBoard();
       socialNetwork.register(u, board);
       u.start();
     });
