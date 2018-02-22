@@ -22,8 +22,9 @@ public class Worker extends Thread {
         } catch (InterruptedException e) {
           e.printStackTrace();
         }
+      } else {
+        process(nextTask.get());
       }
-      process(nextTask.get());
     }
   }
 
@@ -40,5 +41,5 @@ public class Worker extends Thread {
         backlog.add(nextTask);
       }
     }
-    }
+  }
 }

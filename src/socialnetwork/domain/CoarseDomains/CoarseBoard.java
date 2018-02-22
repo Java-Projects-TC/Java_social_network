@@ -33,12 +33,7 @@ public class CoarseBoard extends BaseBoard {
 
   @Override
   public int size() {
-    lock.lock();
-    try {
       return super.size();
-    } finally {
-      lock.unlock();
-    }
   }
 
   @Override
@@ -50,4 +45,5 @@ public class CoarseBoard extends BaseBoard {
       lock.unlock();
     }
   }
+
 }

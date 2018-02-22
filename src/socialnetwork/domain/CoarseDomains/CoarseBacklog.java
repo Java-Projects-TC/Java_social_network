@@ -3,9 +3,7 @@ package socialnetwork.domain.CoarseDomains;
 import java.util.Optional;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-import socialnetwork.domain.Backlog;
 import socialnetwork.domain.BaseDomains.BaseBacklog;
-import socialnetwork.domain.BaseDomains.BaseBoard;
 import socialnetwork.domain.Task;
 
 public class CoarseBacklog extends BaseBacklog {
