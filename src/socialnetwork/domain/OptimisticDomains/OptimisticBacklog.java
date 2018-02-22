@@ -1,11 +1,11 @@
-package socialnetwork.domain.BaseDomains;
+package socialnetwork.domain.OptimisticDomains;
 
 import java.util.Optional;
 import socialnetwork.domain.Backlog;
+import socialnetwork.domain.SetImplementations.OptimisticSet;
 import socialnetwork.domain.Task;
-import socialnetwork.domain.SetImplementations.SequentialSet;
 
-public class BaseBacklog extends SequentialSet implements Backlog {
+public class OptimisticBacklog extends OptimisticSet implements Backlog{
 
   @Override
   public boolean add(Task task) {

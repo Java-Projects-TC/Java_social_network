@@ -1,11 +1,14 @@
-package socialnetwork.domain.BaseDomains;
+package socialnetwork.domain.FineDomains;
 
 import java.util.Optional;
 import socialnetwork.domain.Backlog;
+import socialnetwork.domain.SetImplementations.FineSet;
 import socialnetwork.domain.Task;
-import socialnetwork.domain.SetImplementations.SequentialSet;
 
-public class BaseBacklog extends SequentialSet implements Backlog {
+public class FineBacklog extends FineSet implements Backlog{
+
+  // Again, Duplication is here because I wanted to compare speeds with
+  // coarse grained.
 
   @Override
   public boolean add(Task task) {

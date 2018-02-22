@@ -1,16 +1,18 @@
-package socialnetwork.domain.BaseDomains;
+package socialnetwork.domain.OptimisticDomains;
 
 import java.util.List;
 import socialnetwork.domain.Board;
 import socialnetwork.domain.Message;
-import socialnetwork.domain.SetImplementations.SequentialSet;
+import socialnetwork.domain.SetImplementations.OptimisticSet;
 
-public class BaseBoard extends SequentialSet implements Board {
+public class OptimisticBoard extends OptimisticSet implements Board {
 
+  @Override
   public boolean addMessage(Message message) {
     return super.add(message);
   }
 
+  @Override
   public boolean deleteMessage(Message message) {
     return super.remove(message);
   }
@@ -24,4 +26,5 @@ public class BaseBoard extends SequentialSet implements Board {
   public List<Message> getBoardSnapshot() {
     return toArrayList();
   }
+
 }

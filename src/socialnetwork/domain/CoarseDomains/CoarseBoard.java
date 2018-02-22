@@ -25,7 +25,7 @@ public class CoarseBoard extends BaseBoard {
   public boolean deleteMessage(Message message) {
     lock.lock();
     try {
-      return super.addMessage(message);
+      return super.deleteMessage(message);
     } finally {
       lock.unlock();
     }

@@ -1,4 +1,4 @@
-package socialnetwork.domain.sequential;
+package socialnetwork.domain.SetImplementations;
 
 // Taken from Antonio's gitlab
 
@@ -8,15 +8,15 @@ public class SequentialNode<E> implements Node<E> {
   private int key;
   private Node<E> next;
 
-  public SequentialNode(E item) {
+  SequentialNode(E item) {
     this(item, null);
   }
 
-  public SequentialNode(E item, Node<E> next) {
+  private SequentialNode(E item, Node<E> next) {
     this(item, item.hashCode(), next);
   }
 
-  protected SequentialNode(E item, int key, Node<E> next) {
+  SequentialNode(E item, int key, Node<E> next) {
     this.item = item;
     this.key = key;
     this.next = next;

@@ -14,15 +14,20 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import org.junit.Test;
 import socialnetwork.domain.Backlog;
-import socialnetwork.domain.BaseDomains.BaseBacklog;
-import socialnetwork.domain.BaseDomains.BaseBoard;
 import socialnetwork.domain.Board;
-import socialnetwork.domain.CoarseDomains.CoarseBacklog;
-import socialnetwork.domain.CoarseDomains.CoarseBoard;
 import socialnetwork.domain.Message;
+import socialnetwork.domain.OptimisticDomains.OptimisticBacklog;
+import socialnetwork.domain.OptimisticDomains.OptimisticBoard;
 import socialnetwork.domain.Worker;
 
 public class TestSuite {
+
+  @Test
+  public void testZeroParams() {
+    ExperimentSettings settings = new ExperimentSettings(0, 0, 0,
+        0, 0);
+    runExperiment(settings);
+  }
 
   @Test
   public void testSmallParams() {
@@ -52,6 +57,13 @@ public class TestSuite {
     runExperiment(settings);
   }
 
+  @Test
+  public void testHugeParams() {
+    ExperimentSettings settings = new ExperimentSettings(40, 250, 150,
+        40, 654321);
+    runExperiment(settings);
+  }
+
 
   static class ExperimentSettings {
 
@@ -75,7 +87,7 @@ public class TestSuite {
 
   private void runExperiment(ExperimentSettings settings) {
     //TODO replace by your Backlog implementation
-    Backlog backlog = new BaseBacklog();
+    Backlog backlog = new OptimisticBacklog();
     SocialNetwork socialNetwork = new SocialNetwork(backlog);
 
     Worker[] workers = new Worker[settings.nWorkers];
@@ -93,7 +105,7 @@ public class TestSuite {
     });
     Arrays.stream(userThreads).forEach(u -> {
       //TODO add your own board implementation
-      Board board = new BaseBoard();
+      Board board = new OptimisticBoard();
       socialNetwork.register(u, board);
       u.start();
     });

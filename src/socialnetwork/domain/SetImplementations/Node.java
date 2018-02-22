@@ -1,4 +1,4 @@
-package socialnetwork.domain.sequential;
+package socialnetwork.domain.SetImplementations;
 
 public interface Node<T> {
 

@@ -1,9 +1,7 @@
-package socialnetwork.domain.sequential;
+package socialnetwork.domain.SetImplementations;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 public class SequentialSet<E> {
 
@@ -12,10 +10,8 @@ public class SequentialSet<E> {
   // Slightly modified so that the head is created in here rather than as a
   // static variable in SeqNode.
 
-  int size = 0;
+  private int size = 0;
   private Node<E> head, tail;
-
-  private Lock lock = new ReentrantLock();
 
   public SequentialSet() {
     head = new SequentialNode<>(null, Integer.MIN_VALUE, null);
@@ -23,13 +19,11 @@ public class SequentialSet<E> {
     head.setNext(tail);
   }
 
-  public Node<E> getFirst(){
+  protected Node<E> getFirst(){
     return head.next();
   }
 
-  public List<E> toArrayList(){
-    lock.lock();
-    try {
+  protected List<E> toArrayList() {
       List<E> list = new ArrayList<>();
       Node<E> node = head.next();
       while (node != tail) {
@@ -37,9 +31,6 @@ public class SequentialSet<E> {
         node = node.next();
       }
       return list;
-    } finally {
-      lock.unlock();
-    }
   }
 
   private Position<E> find(Node<E> start, int key) {
@@ -49,19 +40,10 @@ public class SequentialSet<E> {
       pred = curr;
       curr = curr.next();
     } while (curr.key() < key);  // until curr.key >= key
-    return new Position<E>(pred, curr);
-  }
-
-  public boolean contains(E item) {
-    Node<E> node = new SequentialNode<>(item);
-    Position<E> expectedPosition = find(head, node.key());
-
-    return expectedPosition.curr.key() == node.key();
+    return new Position<>(pred, curr);
   }
 
   public boolean add(E item) {
-    lock.lock();
-    try {
       Node<E> node = new SequentialNode<>(item);
       Position<E> where = find(head, node.key());
       if (where.curr.key() == node.key()) {
@@ -72,14 +54,9 @@ public class SequentialSet<E> {
         size += 1;
         return true;
       }
-    } finally {
-      lock.unlock();
-    }
   }
 
   public boolean remove(E item) {
-    lock.lock();
-    try {
       Node<E> node = new SequentialNode<>(item);
       Position<E> where = find(head, node.key());
       if (where.curr.key() > node.key()) {
@@ -89,9 +66,6 @@ public class SequentialSet<E> {
         size -= 1;
         return true;
       }
-    }finally {
-      lock.unlock();
-    }
   }
 
   public int size() {
@@ -101,9 +75,9 @@ public class SequentialSet<E> {
 
   private static class Position<T> {
 
-    public final Node<T> pred, curr;
+    final Node<T> pred, curr;
 
-    public Position(Node<T> pred, Node<T> curr) {
+    Position(Node<T> pred, Node<T> curr) {
       this.pred = pred;
       this.curr = curr;
     }
