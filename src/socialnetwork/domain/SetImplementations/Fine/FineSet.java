@@ -1,8 +1,9 @@
-package socialnetwork.domain.SetImplementations;
+package socialnetwork.domain.SetImplementations.Fine;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+import socialnetwork.domain.SetImplementations.Node;
 
 public class FineSet<E> {
 
@@ -15,7 +16,7 @@ public class FineSet<E> {
     head.setNext(tail);
   }
 
-  protected LockableNode<E> getFirst(){
+  protected LockableNode<E> getFirst() {
     return head.next();
   }
 

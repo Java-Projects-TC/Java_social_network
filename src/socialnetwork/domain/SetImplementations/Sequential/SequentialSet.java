@@ -1,7 +1,8 @@
-package socialnetwork.domain.SetImplementations;
+package socialnetwork.domain.SetImplementations.Sequential;
 
 import java.util.ArrayList;
 import java.util.List;
+import socialnetwork.domain.SetImplementations.Node;
 
 public class SequentialSet<E> {
 

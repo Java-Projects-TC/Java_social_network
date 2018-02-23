@@ -9,9 +9,9 @@ import java.util.Optional;
 import java.util.Set;
 import org.junit.Test;
 import socialnetwork.domain.Backlog;
-import socialnetwork.domain.BaseDomains.BaseBacklog;
-import socialnetwork.domain.BaseDomains.BaseBoard;
 import socialnetwork.domain.Board;
+import socialnetwork.domain.LockFreeDomains.LockFreeBacklog;
+import socialnetwork.domain.LockFreeDomains.LockFreeBoard;
 import socialnetwork.domain.Message;
 import socialnetwork.domain.Task;
 import socialnetwork.domain.Task.Command;
@@ -22,8 +22,8 @@ public class BasicTests {
   @Test
   public void testRegistration() {
     //TODO replace null here by your implementation of Board and Backlog
-    Backlog backlog = new BaseBacklog();
-    Board board = new BaseBoard();
+    Backlog backlog = new LockFreeBacklog();
+    Board board = new LockFreeBoard();
     SocialNetwork socialNetwork = new SocialNetwork(backlog);
     User user = new User("test", socialNetwork);
     socialNetwork.register(user, board);
@@ -35,10 +35,10 @@ public class BasicTests {
   @Test
   public void testMessageLifecycle() {
     //TODO replace null here by your implementation of Board and Backlog
-    Backlog backlog = new BaseBacklog();
-    Board board1 = new BaseBoard();
-    Board board2 = new BaseBoard();
-    Board board3 = new BaseBoard();
+    Backlog backlog = new LockFreeBacklog();
+    Board board1 = new LockFreeBoard();
+    Board board2 = new LockFreeBoard();
+    Board board3 = new LockFreeBoard();
     SocialNetwork socialNetwork = new SocialNetwork(backlog);
     User user1 = new User("test1", socialNetwork);
     User user2 = new User("test2", socialNetwork);

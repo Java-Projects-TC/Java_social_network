@@ -1,6 +1,8 @@
-package socialnetwork.domain.SetImplementations;
+package socialnetwork.domain.SetImplementations.Sequential;
 
 // Taken from Antonio's gitlab
+
+import socialnetwork.domain.SetImplementations.Node;
 
 public class SequentialNode<E> implements Node<E> {
 

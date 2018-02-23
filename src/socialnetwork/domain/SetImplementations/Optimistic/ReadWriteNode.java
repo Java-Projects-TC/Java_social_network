@@ -1,9 +1,10 @@
-package socialnetwork.domain.SetImplementations;
+package socialnetwork.domain.SetImplementations.Optimistic;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+import socialnetwork.domain.SetImplementations.Node;
 
-public class ReadWriteNode<E> implements Node<E>{
+public class ReadWriteNode<E> implements Node<E> {
 
   private Lock lock = new ReentrantLock();
   private E item;

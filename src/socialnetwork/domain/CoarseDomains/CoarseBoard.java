@@ -33,7 +33,7 @@ public class CoarseBoard extends BaseBoard {
 
   @Override
   public int size() {
-      return super.size();
+    return super.size();
   }
 
   @Override

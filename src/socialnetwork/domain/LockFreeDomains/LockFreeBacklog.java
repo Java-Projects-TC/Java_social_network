@@ -1,11 +1,11 @@
-package socialnetwork.domain.BaseDomains;
+package socialnetwork.domain.LockFreeDomains;
 
 import java.util.Optional;
 import socialnetwork.domain.Backlog;
-import socialnetwork.domain.SetImplementations.Sequential.SequentialSet;
+import socialnetwork.domain.SetImplementations.LockFree.LockFreeSet;
 import socialnetwork.domain.Task;
 
-public class BaseBacklog extends SequentialSet implements Backlog {
+public class LockFreeBacklog extends LockFreeSet implements Backlog {
 
   @Override
   public boolean add(Task task) {
@@ -15,7 +15,7 @@ public class BaseBacklog extends SequentialSet implements Backlog {
   @Override
   public Optional<Task> getNextTaskToProcess() {
     if (size() != 0) {
-      Task nextTask = (Task) getFirst().item(); // had to Downcast here
+      Task nextTask = (Task) getFirst().item();
       if (remove(nextTask)) {
         return Optional.of(nextTask);
       }

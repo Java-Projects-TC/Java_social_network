@@ -1,16 +1,16 @@
 package socialnetwork.domain.SetImplementations;
 
-public interface Node<T> {
+public interface Node<E> {
 
-  T item();
+  E item();
 
   int key();
 
-  Node<T> next();
+  Node<E> next();
 
-  void setItem(T item);
+  void setItem(E item);
 
   void setKey(int key);
 
-  void setNext(Node<T> next);
+  void setNext(Node<E> next);
 }

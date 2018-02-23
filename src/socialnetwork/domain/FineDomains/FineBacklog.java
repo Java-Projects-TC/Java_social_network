@@ -2,7 +2,7 @@ package socialnetwork.domain.FineDomains;
 
 import java.util.Optional;
 import socialnetwork.domain.Backlog;
-import socialnetwork.domain.SetImplementations.FineSet;
+import socialnetwork.domain.SetImplementations.Fine.FineSet;
 import socialnetwork.domain.Task;
 
 public class FineBacklog extends FineSet implements Backlog{

@@ -29,6 +29,42 @@ public class TestSuite {
     runExperiment(settings);
   }
 
+  /* Glad this doesn't work as it never terminates
+  @Test
+  public void testNoWorkers() {
+    ExperimentSettings settings = new ExperimentSettings(0, 5, 50,
+        3, 111111);
+    runExperiment(settings);
+  } */
+
+  @Test
+  public void testNoUsers() {
+    ExperimentSettings settings = new ExperimentSettings(1, 0, 50,
+        3, 111111);
+    runExperiment(settings);
+  }
+
+  @Test
+  public void testZeroMaxActions() {
+    ExperimentSettings settings = new ExperimentSettings(1, 1, 0,
+        3, 222222);
+    runExperiment(settings);
+  }
+
+  @Test
+  public void testZereoRecipients() {
+    ExperimentSettings settings = new ExperimentSettings(1, 1, 50,
+        0, 333333);
+    runExperiment(settings);
+  }
+
+  @Test
+  public void testOneOfAll() {
+    ExperimentSettings settings = new ExperimentSettings(1, 1, 1,
+        1, 1);
+    runExperiment(settings);
+  }
+
   @Test
   public void testSmallParams() {
     ExperimentSettings settings = new ExperimentSettings(1, 5, 50,
@@ -84,6 +120,7 @@ public class TestSuite {
 
   }
 
+  // My lock-free implementation doesn't work with test huge params
 
   private void runExperiment(ExperimentSettings settings) {
     //TODO replace by your Backlog implementation

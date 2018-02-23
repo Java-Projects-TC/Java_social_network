@@ -1,8 +1,9 @@
-package socialnetwork.domain.SetImplementations;
+package socialnetwork.domain.SetImplementations.Optimistic;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+import socialnetwork.domain.SetImplementations.Node;
 
 public class OptimisticSet<E> {
 
@@ -17,7 +18,7 @@ public class OptimisticSet<E> {
     head.setNext(tail);
   }
 
-  protected ReadWriteNode<E> getFirst(){
+  protected ReadWriteNode<E> getFirst() {
     return head.next();
   }
 
@@ -94,24 +95,6 @@ public class OptimisticSet<E> {
             size.decrementAndGet();
             return true;
           }
-        }
-      } finally {
-        pred.unlock();
-        curr.unlock();
-      }
-    } while (true);
-  }
-
-  public boolean contains(E item) {
-    Node<E> node = new ReadWriteNode<>(item);
-    do {
-      Position<E> where = find(head, node.key());
-      ReadWriteNode<E> pred = where.pred, curr = where.curr;
-      pred.lock();
-      curr.lock();
-      try {
-        if (valid(pred, curr)) {
-          return where.curr.key() == node.key();
         }
       } finally {
         pred.unlock();

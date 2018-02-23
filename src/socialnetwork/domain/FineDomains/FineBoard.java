@@ -3,7 +3,7 @@ package socialnetwork.domain.FineDomains;
 import java.util.List;
 import socialnetwork.domain.Board;
 import socialnetwork.domain.Message;
-import socialnetwork.domain.SetImplementations.FineSet;
+import socialnetwork.domain.SetImplementations.Fine.FineSet;
 
 public class FineBoard extends FineSet implements Board{
 

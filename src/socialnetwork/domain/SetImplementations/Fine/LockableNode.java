@@ -1,7 +1,8 @@
-package socialnetwork.domain.SetImplementations;
+package socialnetwork.domain.SetImplementations.Fine;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+import socialnetwork.domain.SetImplementations.Node;
 
 public class LockableNode<E> implements Node<E> {
 

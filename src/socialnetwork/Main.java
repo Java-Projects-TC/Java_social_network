@@ -1,7 +1,5 @@
 package socialnetwork;
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.Arrays;
 import socialnetwork.domain.Backlog;
 import socialnetwork.domain.Board;
@@ -12,17 +10,19 @@ import socialnetwork.domain.Worker;
 public class Main {
 
   public static void main(String[] args) {
-    // Implement logic here following the steps described in the specs
+    int numWorkers = Integer.parseInt(args[0]);
+    int numUsers = Integer.parseInt(args[1]);
+
     // create backlog
     Backlog backlog = new OptimisticBacklog();
     // create social network
     SocialNetwork facebook = new SocialNetwork(backlog);
     // create 5 workers
-    Worker[] workers = new Worker[5];
+    Worker[] workers = new Worker[numWorkers];
     Arrays.setAll(workers, i -> new Worker(backlog));
     Arrays.stream(workers).forEach(Thread::start);
     // Create 10 users
-    User[] users = new User[10];
+    User[] users = new User[numUsers];
     Arrays.setAll(users, i -> {
       User user = new User("user" + i, facebook);
       return user;
@@ -59,7 +59,6 @@ public class Main {
       }
     });
     // wait for workers to terminate
-    assertEquals(0, backlog.numberOfTasksInTheBacklog());
-    System.out.println("Work's done");
+    System.out.println("all done");
   }
 }
